@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>驚喜小網頁</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        #run-button {
+            position: absolute;
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>你是大笨蛋嗎？</h1>
+        <p>請點擊下方的「不是」來證明你的清白</p>
+        <button id="run-button">我不是</button>
+    </div>
+
+    <script>
+        const btn = document.getElementById('run-button');
+
+        // 當滑鼠「靠近」按鈕時觸發
+        btn.addEventListener('mouseover', function() {
+            // 計算隨機位置，但避開螢幕邊緣
+            const x = Math.random() * (window.innerWidth - btn.clientWidth);
+            const y = Math.random() * (window.innerHeight - btn.clientHeight);
+            
+            // 讓按鈕瞬間移動
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        });
+
+        // 萬一對方手速太快真的點到了
+        btn.addEventListener('click', function() {
+            alert('竟然被你點到了！你一定是作弊！');
+        });
+    </script>
+</body>
+</html>
