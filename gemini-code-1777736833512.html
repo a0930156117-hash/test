@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>清白測試</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+            font-family: "Microsoft JhengHei", sans-serif;
+            overflow: hidden;
+            touch-action: none;
+        }
+        .card {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 80%;
+        }
+        h1 { color: #2d3436; font-size: 24px; margin-bottom: 10px; }
+        p { color: #636e72; margin-bottom: 30px; }
+        
+        #run-button {
+            position: absolute;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #00b894;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            transition: transform 0.1s ease;
+            box-shadow: 0 5px 15px rgba(0,184,148,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>測驗：你是 Gay 嗎？</h1>
+        <p>請點擊下方按鈕證明你的清白</p>
+        <div style="height: 60px;"></div> </div>
+
+    <button id="run-button">我不是！</button>
+
+    <script>
+        const btn = document.getElementById('run-button');
+
+        // 初始化按鈕位置在中間偏下
+        window.onload = () => {
+            btn.style.left = (window.innerWidth / 2 - btn.clientWidth / 2) + 'px';
+            btn.style.top = (window.innerHeight / 2 + 50) + 'px';
+        };
+
+        // 核心邏輯：手指一碰到就閃開
+        function flyAway(e) {
+            e.preventDefault();
+            
+            // 計算隨機位置，保留邊距防止跑出螢幕外
+            const padding = 20;
+            const newX = Math.random() * (window.innerWidth - btn.clientWidth - padding * 2) + padding;
+            const newY = Math.random() * (window.innerHeight - btn.clientHeight - padding * 2) + padding;
+            
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
+        }
+
+        // 同時支援手機觸控與滑鼠
+        btn.addEventListener('touchstart', flyAway);
+        btn.addEventListener('mouseover', flyAway);
+
+        // 如果真的被點到了
+        btn.addEventListener('click', function() {
+            alert('恭喜！你成功證明了自己的清白（或者你只是手速太快）！');
+        });
+    </script>
+</body>
+</html>
